@@ -2,7 +2,6 @@
 // provided by agn|apps - software@agn.de
 // Gerrit Maedge; Torsten Moehlenhoff; Mario Billep
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;

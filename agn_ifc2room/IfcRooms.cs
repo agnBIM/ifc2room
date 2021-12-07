@@ -52,6 +52,8 @@ namespace agn.ifc2revitRooms
                 context.CreateContext();
                 var instances = context.ShapeInstances();
 
+                double scalingFactor = model.ModelFactors.LengthToMetresConversionFactor;
+
                 foreach (var instance in instances)
                 {
                     var productId = instance.IfcProductLabel;
@@ -76,12 +78,12 @@ namespace agn.ifc2revitRooms
                             {
                                 var newPoint = transform.Transform(str);
 #if DBG20
-                                pointsTri.Add(new XYZ(UnitUtils.ConvertToInternalUnits(newPoint.X, DisplayUnitType.DUT_METERS_CENTIMETERS), UnitUtils.ConvertToInternalUnits(newPoint.Y, DisplayUnitType.DUT_METERS_CENTIMETERS), UnitUtils.ConvertToInternalUnits(newPoint.Z, DisplayUnitType.DUT_METERS_CENTIMETERS)));
-                                pointsGeom.Add(new Polybool.Net.Objects.Point(Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.X, DisplayUnitType.DUT_METERS_CENTIMETERS)), Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.Y, DisplayUnitType.DUT_METERS_CENTIMETERS))));
+                                pointsTri.Add(new XYZ(UnitUtils.ConvertToInternalUnits(newPoint.X*scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS), UnitUtils.ConvertToInternalUnits(newPoint.Y*scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS), UnitUtils.ConvertToInternalUnits(newPoint.Z*scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS)));
+                                pointsGeom.Add(new Polybool.Net.Objects.Point(Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.X*scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS)), Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.Y*scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS))));
 
 #else
-                                pointsTri.Add(new XYZ(UnitUtils.ConvertToInternalUnits(newPoint.X, UnitTypeId.Meters), UnitUtils.ConvertToInternalUnits(newPoint.Y, UnitTypeId.Meters), UnitUtils.ConvertToInternalUnits(newPoint.Z, UnitTypeId.Meters)));
-                                pointsGeom.Add(new Polybool.Net.Objects.Point(Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.X, UnitTypeId.Meters)), Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.Y, UnitTypeId.Meters))));
+                                pointsTri.Add(new XYZ(UnitUtils.ConvertToInternalUnits(newPoint.X*scalingFactor, UnitTypeId.Meters), UnitUtils.ConvertToInternalUnits(newPoint.Y * scalingFactor, UnitTypeId.Meters), UnitUtils.ConvertToInternalUnits(newPoint.Z * scalingFactor, UnitTypeId.Meters)));
+                                pointsGeom.Add(new Polybool.Net.Objects.Point(Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.X * scalingFactor, UnitTypeId.Meters)), Convert.ToDecimal(UnitUtils.ConvertToInternalUnits(newPoint.Y * scalingFactor, UnitTypeId.Meters))));
  
 #endif                           
                             }
@@ -160,7 +162,7 @@ namespace agn.ifc2revitRooms
 
                             double roomHeight = UnitUtils.ConvertToInternalUnits(instance.BoundingBox.SizeZ, DisplayUnitType.DUT_METERS_CENTIMETERS);
 #else
-                            double roomHeight = UnitUtils.ConvertToInternalUnits(instance.BoundingBox.SizeZ, UnitTypeId.Meters);
+                            double roomHeight = UnitUtils.ConvertToInternalUnits(instance.BoundingBox.SizeZ * scalingFactor, UnitTypeId.Meters);
 
 #endif
 
