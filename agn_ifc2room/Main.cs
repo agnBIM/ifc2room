@@ -29,6 +29,8 @@ namespace agn.ifc2revitRooms
             {
                 string filename = wpf.filename;
 
+                Logger.clear();
+
                 using (Transaction transaction = new Transaction(doc))
                 {
                     if (transaction.Start("ifc2room") == TransactionStatus.Started)

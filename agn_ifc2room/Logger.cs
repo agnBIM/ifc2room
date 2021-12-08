@@ -9,6 +9,8 @@ using System.IO;
 
 namespace agn.ifc2revitRooms
 {
+    //WIP->
+
     public static class Logger
     {
         private static string dateNow = DateTime.Now.ToString("yyyy-dd-M_HH-mm-ss");
@@ -18,7 +20,6 @@ namespace agn.ifc2revitRooms
         public static string logContIfcVersion;
         public static string logContNativeApp;
         private static string logTextRoomCount = "Rooms generated: ";
-        //public static string logContRoomCount;
         private static string logTextRoomInacc = "Rooms with small geometrical inaccuracy:\n";
         public static string logContRoomInacc;
         public static string logTextRoomsFailed = "Following Rooms could not be generated:\n";
@@ -88,10 +89,15 @@ namespace agn.ifc2revitRooms
                     System.Diagnostics.Process.Start(logfilePath);
                 }
             }
-
-
         }
 
+        public static void clear()
+        {
+            logContRoomInacc = null;
+            logContRoomsFailed = null;
+        }
 
     }
+
+    //WIP<-|
 }
