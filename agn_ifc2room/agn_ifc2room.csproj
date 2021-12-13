@@ -279,13 +279,13 @@ goto exit
 copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2019"
 goto exit
 :2020
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2020\ifc2room"
+copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2020"
 goto exit
 :2021
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2021\ifc2room"
+copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2021"
 goto exit
 :2022
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2022\ifc2room"
+copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2022"
 :exit</PostBuildEvent>
   </PropertyGroup>
 </Project>
