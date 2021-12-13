@@ -1,0 +1,31 @@
+﻿<!--Copyright (C) by agn Niederberghaus & Partner GmbH-->
+<!--provided by agn|apps - software@agn.de-->
+<!--Gerrit Maedge; Torsten Moehlenhoff; Mario Billep-->
+
+   
+<Window x:Class="agn.ifc2revitRooms.appstoreWpf"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:agn.ifc2revitRooms"
+             mc:Ignorable="d"
+             Title="agn | ifc2room  1.0"
+             Style="{DynamicResource CustomTitleBar}" WindowStyle="None" MinWidth="680" MinHeight="180" Height="243.333" Width="659.333">
+
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml" />
+    </Window.Resources>
+
+    <Grid Background="#FF151515">
+        <TextBox x:Name="agnWpfPath" Text=" C:\" ToolTip="Path to ifc-file (double-click)" Margin="128,60,0,0" VerticalAlignment="Top" MouseDoubleClick="agnWpfPath_MouseDoubleClick" IsManipulationEnabled="True" Height="28" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="504"/>
+        <Button Content="Start" Margin="559,173,0,0" Click="Button_Click" HorizontalAlignment="Left" Width="73" Height="28" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboViewFam" ToolTip="Choose viewfamilytype for room-boundary placement" Margin="128,114,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="504"/>
+        <Image x:Name="logo2" Height="40" Margin="128,167,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="185"/>
+        <Label Content="Path" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top" Width="66" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="ViewType" HorizontalAlignment="Left" Margin="30,114,0,0" VerticalAlignment="Top" Width="66" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Image x:Name="logo" Height="40" Margin="30,167,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="66"/>
+
+    </Grid>
+
+</Window>
