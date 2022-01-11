@@ -46,6 +46,7 @@
     <OutputPath>bin\DBG22\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -201,6 +202,9 @@
     <Compile Include="AllWarningSwallower.cs" />
     <Compile Include="appstoreWpf.xaml.cs" />
     <Compile Include="CustomBar.xaml.cs" />
+    <Compile Include="FailureWindow.xaml.cs">
+      <DependentUpon>FailureWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GeometricOps.cs" />
     <Compile Include="IfcRooms.cs" />
     <Compile Include="Logger.cs" />
@@ -229,6 +233,10 @@
     <Page Include="appstoreWpf.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FailureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -285,7 +293,8 @@ goto exit
 copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2021"
 goto exit
 :2022
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2022"
+REM copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2022"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\ifc2room.bundle\Contents\2022"
 :exit</PostBuildEvent>
   </PropertyGroup>
 </Project>

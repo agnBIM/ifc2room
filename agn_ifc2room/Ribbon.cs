@@ -38,8 +38,8 @@ namespace agn.ifc2revitRooms
             pbd.Image = convertFromBitmap(agn.ifc2revitRooms.Properties.Resources.Icon2_ifc2room_16);
 
             string path;
-            path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.ChmFile, path + "/Resources/ContextHelp.html");
+            path = System.IO.Directory.GetParent(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)).ToString();
+            ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.ChmFile, path + @"\Resources\ContextHelp.html");
             pbd.SetContextualHelp(contextHelp);
 
             rp.AddItem(pbd);

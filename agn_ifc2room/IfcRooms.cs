@@ -202,14 +202,14 @@ namespace agn.ifc2revitRooms
             FilteredElementCollector lvlCollector = new FilteredElementCollector(doc);
             IList<Element> lvl = lvlCollector.OfClass(typeof(Level)).ToElements();
 
+            IList<ElementId> lvlIds = new List<ElementId>();
+
             foreach (Element ele in lvl)
             {
-                try
-                {
-                    doc.Delete(ele.Id);
-                }
-                catch { }
+                lvlIds.Add(ele.Id);
             }
+
+            doc.Delete(lvlIds);
 
             List<ViewPlan> newViews = new List<ViewPlan>();
 
