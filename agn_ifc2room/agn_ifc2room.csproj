@@ -288,9 +288,11 @@ copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2019"
 goto exit
 :2020
 copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2020"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\ifc2room.bundle\Contents\2020"
 goto exit
 :2021
 copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2021"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\ifc2room.bundle\Contents\2021"
 goto exit
 :2022
 REM copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2022"
