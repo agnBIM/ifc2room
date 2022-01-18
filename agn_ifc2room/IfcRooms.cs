@@ -209,7 +209,23 @@ namespace agn.ifc2revitRooms
                 lvlIds.Add(ele.Id);
             }
 
-            doc.Delete(lvlIds);
+            try
+            {
+                doc.Delete(lvlIds);
+            }
+            catch
+            {
+                foreach (ElementId eleId in lvlIds)
+                {
+                    try
+                    {
+                        doc.Delete(eleId);
+                    }
+                    catch
+                    { };
+                }
+            }
+            
 
             List<ViewPlan> newViews = new List<ViewPlan>();
 

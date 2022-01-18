@@ -13,8 +13,8 @@
     </Window.Resources>
 
     <Grid Background="#FF111111">
-        <Label Content="Please fill out the form with valid data." Margin="30,52,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="216"/>
-        <Button Content="OK" Margin="277,52,29,0" VerticalAlignment="Top" Height="28" Click="Button_Click"/>
+        <Label x:Name="ErrorMessage" Content="Please fill out the form with valid data." Margin="30,52,140,26"/>
+        <Button Content="OK" Margin="0,0,29,26" Click="Button_Click" HorizontalAlignment="Right" Width="80" Height="28" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>

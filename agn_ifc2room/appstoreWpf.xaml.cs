@@ -5,6 +5,7 @@
 
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -50,15 +51,25 @@ namespace agn.ifc2revitRooms
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (comboViewFam.SelectedItem != null & System.IO.File.Exists(agnWpfPath.Text) & System.IO.Path.GetExtension(agnWpfPath.Text) == ".ifc")
+            try
             {
-                viewFam = viewFamTypeList[comboViewFam.SelectedItem.ToString()];
-                this.DialogResult = true;
-                this.Close();
+                if (comboViewFam.SelectedItem != null & System.IO.File.Exists(agnWpfPath.Text) & System.IO.Path.GetExtension(agnWpfPath.Text) == ".ifc")
+                {
+                    viewFam = viewFamTypeList[comboViewFam.SelectedItem.ToString()];
+                    filename = agnWpfPath.Text;
+                    this.DialogResult = true;
+                    this.Close();
+                }
+                else
+                {
+                    FailureWindow fw = new FailureWindow();
+                    fw.ShowDialog();
+                }
             }
-            else
+            catch (Exception exc)
             {
                 FailureWindow fw = new FailureWindow();
+                fw.ErrorMessage.Content = exc;
                 fw.ShowDialog();
             }
         }
@@ -73,7 +84,18 @@ namespace agn.ifc2revitRooms
             }
 
             agnWpfPath.Text = filename;
+        }
 
+        private void ifcFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "IFC-Models (*.ifc)|*.ifc";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                filename = openFileDialog.FileName;
+            }
+
+            agnWpfPath.Text = filename;
         }
     }
 }
