@@ -10,17 +10,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:agn.ifc2revitRooms"
              mc:Ignorable="d"
-             Title="agn | ifc2room  1.0"
-             Style="{DynamicResource CustomTitleBar}" WindowStyle="None" MinWidth="680" MinHeight="180" Height="243.333" Width="659.333">
+             Title="agn | ifc2room  1.1"
+             Style="{DynamicResource CustomTitleBar}" WindowStyle="None" MinWidth="670" MinHeight="240" Height="240" Width="670">
 
     <Window.Resources>
         <ResourceDictionary Source="Styles.xaml" />
     </Window.Resources>
 
     <Grid Background="#FF151515">
-        <TextBox x:Name="agnWpfPath" Text=" C:\" ToolTip="Path to ifc-file (double-click)" Margin="128,60,0,0" VerticalAlignment="Top" MouseDoubleClick="agnWpfPath_MouseDoubleClick" IsManipulationEnabled="True" Height="28" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="504"/>
-        <Button Content="Start" Margin="559,173,0,0" Click="Button_Click" HorizontalAlignment="Left" Width="73" Height="28" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboViewFam" ToolTip="Choose viewfamilytype for room-boundary placement" Margin="128,114,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="504"/>
+        <TextBox x:Name="agnWpfPath" Text=" C:\" ToolTip="Path to ifc-file (double-click)" Margin="128,60,30,0" VerticalAlignment="Top" MouseDoubleClick="agnWpfPath_MouseDoubleClick" IsManipulationEnabled="True" Height="28" VerticalContentAlignment="Center"/>
+        <Button Content="Start" Margin="0,0,30,31" Click="Button_Click" HorizontalAlignment="Right" Width="73" Height="28" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="comboViewFam" ToolTip="Choose viewfamilytype for room-boundary placement" Margin="128,114,30,0" VerticalAlignment="Top" Height="28"/>
         <Image x:Name="logo2" Height="40" Margin="128,167,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="185"/>
         <Label Content="ViewType" HorizontalAlignment="Left" Margin="30,114,0,0" VerticalAlignment="Top" Width="66" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Image x:Name="logo" Height="40" Margin="30,167,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="66"/>

@@ -270,33 +270,17 @@
     <Error Condition="!Exists('..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine.Interop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine.Interop.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(Configuration) == DGB17 goto 2017
-if $(Configuration) == REL17 goto 2017
-if $(Configuration) == DBG19 goto 2019
-if $(Configuration) == REL19 goto 2019
-if $(Configuration) == DBG20 goto 2020
-if $(Configuration) == REL20 goto 2020
+    <PostBuildEvent>if $(Configuration) == DBG20 goto 2020
 if $(Configuration) == DBG21 goto 2021
-if $(Configuration) == REL21 goto 2021
 if $(Configuration) == DBG22 goto 2022
-if $(Configuration) == REL23 goto 2022
-:2017
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2017"
-goto exit
-:2019
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2019"
-goto exit
 :2020
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2020"
-copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\ifc2room.bundle\Contents\2020"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2020"
 goto exit
 :2021
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2021"
-copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\ifc2room.bundle\Contents\2021"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2021"
 goto exit
 :2022
-REM copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2022"
-copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\ifc2room.bundle\Contents\2022"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2022"
 :exit</PostBuildEvent>
   </PropertyGroup>
 </Project>
