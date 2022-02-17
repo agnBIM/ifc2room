@@ -10,12 +10,13 @@
 # <img src="https://files.agn-group.com/index.php/s/rz2ffk9k9PzpNNN/preview"> 
 agn Niederberghaus &amp; Partner GmbH - agn|apps - software@agn.de <br> 
 <br>
-The ifc2room add-on makes it possible to read architectural rooms (in terms of levels, room
-geometries, room numbers and room names) from Ifc files and transfer them to a designated Revit file.
-The primary target group for this tool are mechanical and electrical engineers who use Revit
-themselves but are provided with the architectural models as Ifc files in openBIM projects. In order to
-generate the required MEP rooms in Revit, the HVAC enineers need a valid data set in the form of
-Revit rooms. This is exactly what the tool provides on the basis of Ifc files.
+ifc2room makes it possible to read architectural rooms (in the form of levels, room geometries, <br>
+room numbers and room names) from an Ifc file and transfers them to a desired Autodesk® Revit® file. <br>
+The primary target group for ifc2room are mechanical and electrical engineers who use Revit themselves <br>
+but are provided with the architectural models as Ifc files in openBIM projects. <br>
+In order to generate the required MEP rooms in Revit, <br>
+the HVAC engineers need a valid data set in the form of Revit architecture rooms.
+This is exactly what ifc2room provides on the basis of Ifc files.
 
 
 ## Installation
