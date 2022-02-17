@@ -1,0 +1,20 @@
+﻿<Window x:Class="agn.ifc2revitRooms.FailureWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:agn.ifc2revitRooms"
+             mc:Ignorable="d"
+             Title="agn | message"
+             Style="{DynamicResource CustomTitleBar}" WindowStyle="None" Height="114" Width="394" MinWidth="370" MinHeight="114">
+
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml" />
+    </Window.Resources>
+
+    <Grid Background="#FF111111">
+        <Label x:Name="ErrorMessage" Content="Please fill out the form with valid data." Margin="30,52,140,26"/>
+        <Button Content="OK" Margin="0,0,29,26" Click="Button_Click" HorizontalAlignment="Right" Width="80" Height="28" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>

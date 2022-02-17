@@ -10,13 +10,13 @@
 # <img src="https://files.agn-group.com/index.php/s/cd34GtbLQ6GwMKn/preview"> 
 agn Niederberghaus &amp; Partner GmbH - agn|apps - software@agn.de <br> 
 <br>
-ifc2room makes it possible to read architectural rooms (in terms of levels, room
-geometries, room numbers and room names) from an Ifc file and transfers them to a desired Revit file.
-The primary target group for ifc2room are mechanical and electrical engineers who use Revit themselves but
-are provided with the architectural models as Ifc files in openBIM
-projects. In order to generate the required MEP rooms in Revit, the HVAC
-engineers need a valid data set in the form of Revit architecture
-rooms. This is exactly what the tool provides on the basis of Ifc files.
+ifc2room makes it possible to read architectural rooms (in the form of levels, room geometries, <br>
+room numbers and room names) from an Ifc file and transfers them to a desired Autodesk® Revit® file. <br>
+The primary target group for ifc2room are mechanical and electrical engineers who use Revit themselves <br>
+but are provided with the architectural models as Ifc files in openBIM projects. <br>
+In order to generate the required MEP rooms in Revit, <br>
+the HVAC engineers need a valid data set in the form of Revit architecture rooms.
+This is exactly what ifc2room provides on the basis of Ifc files.
 
 
 ## Installation
@@ -30,9 +30,10 @@ the "Uninstall" button. OR, click Control Panel > Programs > Programs and Featur
 
 ## Usage Instructions
 1.) Open an empty Revit file (version 2020, 2021, 2022). <br>
-(Caution: ifc2room deletes all levels (and the associated views) from the underlying Revit file and then creates new levels based on the Ifc file.) <br>
-2.) Start ifc2room. <br>
-3.) Selection of the Ifc file to be read (double click in text field). <br>
+Caution: The app deletes all levels (and the associated views) from the underlying Revit file and <br>
+then creates new levels based on the Ifc file. <br>
+2.) Start the program. <br>
+3.) Selection of the Ifc file to be read (Double click in text field). <br>
 4.) Selection of the Revit view type, which shall be the basis for the rooms. <br>
 5.) Press "Start". <br>
 <a href="https://youtu.be/4QLh4xoo99A">Help Video</a> <br>

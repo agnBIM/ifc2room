@@ -46,6 +46,7 @@
     <OutputPath>bin\DBG22\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -201,6 +202,9 @@
     <Compile Include="AllWarningSwallower.cs" />
     <Compile Include="appstoreWpf.xaml.cs" />
     <Compile Include="CustomBar.xaml.cs" />
+    <Compile Include="FailureWindow.xaml.cs">
+      <DependentUpon>FailureWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GeometricOps.cs" />
     <Compile Include="IfcRooms.cs" />
     <Compile Include="Logger.cs" />
@@ -230,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FailureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -248,11 +256,6 @@
   <ItemGroup>
     <None Include="Resources\wpf_logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="installer\agn_ifc2roomR20.exe" />
-    <Content Include="installer\agn_ifc2roomR21.exe" />
-    <Content Include="installer\agn_ifc2roomR22.exe" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine.Interop.targets" Condition="Exists('..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine.Interop.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -262,30 +265,17 @@
     <Error Condition="!Exists('..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine.Interop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine.Interop.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(Configuration) == DGB17 goto 2017
-if $(Configuration) == REL17 goto 2017
-if $(Configuration) == DBG19 goto 2019
-if $(Configuration) == REL19 goto 2019
-if $(Configuration) == DBG20 goto 2020
-if $(Configuration) == REL20 goto 2020
+    <PostBuildEvent>if $(Configuration) == DBG20 goto 2020
 if $(Configuration) == DBG21 goto 2021
-if $(Configuration) == REL21 goto 2021
 if $(Configuration) == DBG22 goto 2022
-if $(Configuration) == REL23 goto 2022
-:2017
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2017"
-goto exit
-:2019
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2019"
-goto exit
 :2020
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2020\ifc2room"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2020"
 goto exit
 :2021
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2021\ifc2room"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2021"
 goto exit
 :2022
-copy "$(ProjectDir)$(OutDir)*.dll" "%25APPDATA%25\Autodesk\Revit\Addins\2022\ifc2room"
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2022"
 :exit</PostBuildEvent>
   </PropertyGroup>
 </Project>
