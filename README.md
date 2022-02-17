@@ -35,7 +35,8 @@ then creates new levels based on the Ifc file. <br>
 2.) Start the program. <br>
 3.) Selection of the Ifc file to be read (Double click in text field). <br>
 4.) Selection of the Revit view type, which shall be the basis for the rooms. <br>
-5.) Press "Start".
+5.) Press "Start". <br>
+<a href="https://youtu.be/4QLh4xoo99A">Help Video</a> <br>
 
 ## Known Limitations
 · Only one architectural model per Ifc file (no merged Ifc files) <br>
