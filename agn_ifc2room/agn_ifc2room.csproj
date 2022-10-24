@@ -48,6 +48,14 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DBG23|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DBG23\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
@@ -105,6 +113,14 @@
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2022\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="RevitAPI" Condition="'$(Configuration)' == 'DBG23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPI" Condition="'$(Configuration)' == 'REL23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'DBG17'">
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2017\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
@@ -143,6 +159,14 @@
     </Reference>
     <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'REL22'">
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2022\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'DBG23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'REL23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -268,6 +292,7 @@
     <PostBuildEvent>if $(Configuration) == DBG20 goto 2020
 if $(Configuration) == DBG21 goto 2021
 if $(Configuration) == DBG22 goto 2022
+if $(Configuration) == DBG23 goto 2023
 :2020
 copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2020"
 goto exit
@@ -276,6 +301,9 @@ copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\a
 goto exit
 :2022
 copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2022"
+goto exit
+:2023
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2023"
 :exit</PostBuildEvent>
   </PropertyGroup>
 </Project>
