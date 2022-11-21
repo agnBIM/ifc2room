@@ -222,7 +222,9 @@ namespace agn.ifc2revitRooms
                         doc.Delete(eleId);
                     }
                     catch
-                    { };
+                    {
+                        doc.GetElement(eleId).Name = "DELETION_UNSUCCESSFULL(View_Opened)_Please_delete_manually";
+                    };
                 }
             }
             
