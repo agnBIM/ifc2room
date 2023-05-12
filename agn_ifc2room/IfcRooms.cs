@@ -19,6 +19,7 @@ namespace agn.ifc2revitRooms
     class IfcRooms
     {
         private string name;
+        private string globalId;
         private string number;
         private string level;
         private CurveArray footprint;
@@ -27,7 +28,8 @@ namespace agn.ifc2revitRooms
         private double height;
 
 
-        public IfcRooms(string Name, string Number, string Level, CurveArray Footprint, XYZ TagPoint, double Height)
+        public IfcRooms(string Name, string Number, string Level, CurveArray Footprint, XYZ TagPoint, double Height,
+            string GlobalId)
         {
             name = Name;
             number = Number;
@@ -35,6 +37,7 @@ namespace agn.ifc2revitRooms
             footprint = Footprint;
             tagPoint = TagPoint;
             height = Height;
+            globalId = GlobalId;
         }
 
         public static List<IfcRooms> fetchRooms(string IfcPath, Document doc)
@@ -157,6 +160,7 @@ namespace agn.ifc2revitRooms
                             IfcSpatialStructureElement param = product as IfcSpatialStructureElement;
                             roomName = param.LongName;
                             roomNumber = product.Name;
+                            var globalId = product.GlobalId.ToString();
 
 #if DBG20
 
@@ -166,7 +170,7 @@ namespace agn.ifc2revitRooms
 
 #endif
 
-                            roomList.Add(new IfcRooms(roomName, roomNumber, instanceLevel, curves, triCentroid, roomHeight));
+                            roomList.Add(new IfcRooms(roomName, roomNumber, instanceLevel, curves, triCentroid, roomHeight, globalId));
 
                         }
                         catch 
