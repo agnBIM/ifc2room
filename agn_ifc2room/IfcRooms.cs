@@ -306,6 +306,9 @@ namespace agn.ifc2revitRooms
                         
                 //limitoffsett property is not working therefore builtinparameter
                 newRoom.get_Parameter(BuiltInParameter.ROOM_UPPER_OFFSET).Set(this.height);
+                                
+                //set GlobalID in the built-in parameter
+                newRoom.get_Parameter(BuiltInParameter.IFC_GUID).Set(this.globalId);
             }
             catch { };
 
