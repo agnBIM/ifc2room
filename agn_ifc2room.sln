@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31402.337
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "agn_ifc2room", "agn_ifc2room\agn_ifc2room.csproj", "{5865417E-EC9F-4CC0-BE46-01F4A36928E0}"
 EndProject
@@ -11,6 +11,7 @@ Global
 		DBG21|Any CPU = DBG21|Any CPU
 		DBG22|Any CPU = DBG22|Any CPU
 		DBG23|Any CPU = DBG23|Any CPU
+		DBG24|Any CPU = DBG24|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
@@ -23,6 +24,8 @@ Global
 		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.DBG22|Any CPU.Build.0 = DBG22|Any CPU
 		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.DBG23|Any CPU.ActiveCfg = DBG23|Any CPU
 		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.DBG23|Any CPU.Build.0 = DBG23|Any CPU
+		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.DBG24|Any CPU.ActiveCfg = DBG24|Any CPU
+		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.DBG24|Any CPU.Build.0 = DBG24|Any CPU
 		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5865417E-EC9F-4CC0-BE46-01F4A36928E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
