@@ -58,6 +58,7 @@ namespace agn.ifc2revitRooms
                 {
                     var productId = instance.IfcProductLabel;
                     IIfcProduct product = model.Instances[productId] as IIfcProduct;
+                    IIfcObjectDefinition objDef = product as IIfcObjectDefinition;
 
                     //ifcspaces are filtered
                     if (product.ToString().Contains("SPACE"))
@@ -151,12 +152,27 @@ namespace agn.ifc2revitRooms
                             IEnumerable<IIfcPropertySingleValue> properties = product.IsDefinedBy.Where(r => r.RelatingPropertyDefinition is IIfcPropertySet).SelectMany(r => ((IIfcPropertySet)r.RelatingPropertyDefinition).HasProperties).OfType<IIfcPropertySingleValue>();
 
                             //set level in instance from ifcparam
-                            instanceLevel = getFloor(product as IfcSpace).Name.ToString();
+                            if (model.Header.SchemaVersion != "IFC4")
+                            {
+                                instanceLevel = getFloor(product as IfcSpace).Name.ToString();
+                                IfcSpatialStructureElement param = product as IfcSpatialStructureElement;
 
-                            //set name and number in instance from ifcparam
-                            IfcSpatialStructureElement param = product as IfcSpatialStructureElement;
-                            roomName = param.LongName;
-                            roomNumber = product.Name;
+                                //set name and number in instance from ifcparam
+                                roomName = param.LongName;
+                                roomNumber = product.Name;
+                            }
+                            else
+                            {
+                                instanceLevel = getFloor(product as Xbim.Ifc4.Interfaces.IIfcSpace).Name.ToString();
+                                Xbim.Ifc4.Interfaces.IIfcSpatialStructureElement param = product as Xbim.Ifc4.Interfaces.IIfcSpatialStructureElement;
+                                
+                                //set name and number in instance from ifcparam
+                                roomName = param.LongName;
+                                roomNumber = product.Name;
+                            }
+                            
+
+                            
 
 #if DBG20
 
@@ -171,9 +187,20 @@ namespace agn.ifc2revitRooms
                         }
                         catch 
                         {
-                            IfcSpatialStructureElement x = product as IfcSpatialStructureElement;
-                            Logger.logContRoomsFailed += product.Name + " - " + x.LongName + "\n";
-                            Logger.logCountRoomsFailed++;
+                            if (model.Header.SchemaVersion != "IFC4")
+                            {
+                                IfcSpatialStructureElement x = product as IfcSpatialStructureElement;
+
+                                Logger.logContRoomsFailed += product.Name + " - " + x.LongName + "\n";
+                                Logger.logCountRoomsFailed++;
+                            }
+                            else
+                            {
+                                IIfcSpatialStructureElement x = product as IIfcSpatialStructureElement;
+
+                                Logger.logContRoomsFailed += product.Name + " - " + x.LongName + "\n";
+                                Logger.logCountRoomsFailed++;
+                            }
                         }
                     }
                 }
@@ -186,82 +213,163 @@ namespace agn.ifc2revitRooms
 
         public static void lvlTrans(List<IfcRooms> Rooms, string IfcPath, Document doc, ViewFamilyType viewFam)
         {
-            List<IfcBuildingStorey> allstories = null;
-
             double scalingFactor;
 
             //open ifc-file and get storeys
             using (IfcStore model = IfcStore.Open(IfcPath, null))
             {
-                allstories = model.Instances.OfType<IfcBuildingStorey>().ToList();
-
-                scalingFactor = model.ModelFactors.LengthToMetresConversionFactor;
-            }
-
-            //get existing levels from revit-file and delete them
-            FilteredElementCollector lvlCollector = new FilteredElementCollector(doc);
-            IList<Element> lvl = lvlCollector.OfClass(typeof(Level)).ToElements();
-
-            IList<ElementId> lvlIds = new List<ElementId>();
-
-            foreach (Element ele in lvl)
-            {
-                lvlIds.Add(ele.Id);
-            }
-
-            try
-            {
-                doc.Delete(lvlIds);
-            }
-            catch
-            {
-                foreach (ElementId eleId in lvlIds)
+                if (model.Header.SchemaVersion != "IFC4")
                 {
+                    List<IfcBuildingStorey> allstories = null;
+                    allstories = model.Instances.OfType<IfcBuildingStorey>().ToList();
+
+                    scalingFactor = model.ModelFactors.LengthToMetresConversionFactor;
+
+
+                    //get existing levels from revit-file and delete them
+                    FilteredElementCollector lvlCollector = new FilteredElementCollector(doc);
+                    IList<Element> lvl = lvlCollector.OfClass(typeof(Level)).ToElements();
+
+                    IList<ElementId> lvlIds = new List<ElementId>();
+
+                    foreach (Element ele in lvl)
+                    {
+                        lvlIds.Add(ele.Id);
+                    }
+
                     try
                     {
-                        doc.Delete(eleId);
+                        doc.Delete(lvlIds);
                     }
                     catch
                     {
-                        doc.GetElement(eleId).Name = "DELETION_UNSUCCESSFULL(View_Opened)_Please_delete_manually";
-                    };
-                }
-            }
-            
+                        foreach (ElementId eleId in lvlIds)
+                        {
+                            try
+                            {
+                                doc.Delete(eleId);
+                            }
+                            catch
+                            {
+                                doc.GetElement(eleId).Name = "DELETION_UNSUCCESSFULL(View_Opened)_Please_delete_manually";
+                            };
+                        }
+                    }
 
-            List<ViewPlan> newViews = new List<ViewPlan>();
 
-            //generate new levels from ifc-info in revit-file
-            foreach (IfcBuildingStorey storey in allstories)
-            {
+                    List<ViewPlan> newViews = new List<ViewPlan>();
+
+                    //generate new levels from ifc-info in revit-file
+                    foreach (IfcBuildingStorey storey in allstories)
+                    {
 #if DBG20
 
-                Level newLvl = Level.Create(doc, UnitUtils.ConvertToInternalUnits(storey.Elevation.Value * scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS));
+                    Level newLvl = Level.Create(doc, UnitUtils.ConvertToInternalUnits(storey.Elevation.Value * scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS));
 
 #else
 
-                Level newLvl = Level.Create(doc, UnitUtils.ConvertToInternalUnits(storey.Elevation.Value * scalingFactor, UnitTypeId.Meters));
+                        Level newLvl = Level.Create(doc, UnitUtils.ConvertToInternalUnits(storey.Elevation.Value * scalingFactor, UnitTypeId.Meters));
 
 #endif
-                newLvl.Name = storey.Name;
+                        newLvl.Name = storey.Name;
 
-                ViewPlan newViewPlan = ViewPlan.Create(doc, viewFam.Id, newLvl.Id);
+                        ViewPlan newViewPlan = ViewPlan.Create(doc, viewFam.Id, newLvl.Id);
 
-                newViewPlan.Name = storey.Name;
+                        newViewPlan.Name = storey.Name;
 
-                newViews.Add(newViewPlan);
-            }
+                        newViews.Add(newViewPlan);
+                    }
 
-            //set viewplan in room instance for boundary placement
-            foreach (IfcRooms room in Rooms)
-            {
-                foreach (ViewPlan vp in newViews)
-                {
-                    if (room.level == vp.Name)
+                    //set viewplan in room instance for boundary placement
+                    foreach (IfcRooms room in Rooms)
                     {
-                        room.view = vp;
+                        foreach (ViewPlan vp in newViews)
+                        {
+                            if (room.level == vp.Name)
+                            {
+                                room.view = vp;
+                            }
+                        }
+                    }
+                } 
+                else
+                {
+                    List<Xbim.Ifc4.Interfaces.IIfcBuildingStorey> allstories = null;
+                    allstories = model.Instances.OfType<Xbim.Ifc4.Interfaces.IIfcBuildingStorey>().ToList();
+
+                    scalingFactor = model.ModelFactors.LengthToMetresConversionFactor;
+
+
+                    //get existing levels from revit-file and delete them
+                    FilteredElementCollector lvlCollector = new FilteredElementCollector(doc);
+                    IList<Element> lvl = lvlCollector.OfClass(typeof(Level)).ToElements();
+
+                    IList<ElementId> lvlIds = new List<ElementId>();
+
+                    foreach (Element ele in lvl)
+                    {
+                        lvlIds.Add(ele.Id);
+                    }
+
+                    try
+                    {
+                        doc.Delete(lvlIds);
+                    }
+                    catch
+                    {
+                        foreach (ElementId eleId in lvlIds)
+                        {
+                            try
+                            {
+                                doc.Delete(eleId);
+                            }
+                            catch
+                            {
+                                doc.GetElement(eleId).Name = "DELETION_UNSUCCESSFULL(View_Opened)_Please_delete_manually";
+                            };
+                        }
+                    }
+
+
+                    List<ViewPlan> newViews = new List<ViewPlan>();
+
+                    //generate new levels from ifc-info in revit-file
+                    foreach (IIfcBuildingStorey storey in allstories)
+                    {
+#if DBG20
+
+                    Level newLvl = Level.Create(doc, UnitUtils.ConvertToInternalUnits(storey.Elevation.Value * scalingFactor, DisplayUnitType.DUT_METERS_CENTIMETERS));
+
+#else
+
+                        Level newLvl = Level.Create(doc, UnitUtils.ConvertToInternalUnits(storey.Elevation.Value * scalingFactor, UnitTypeId.Meters));
+
+#endif
+                        newLvl.Name = storey.Name;
+
+                        ViewPlan newViewPlan = ViewPlan.Create(doc, viewFam.Id, newLvl.Id);
+
+                        newViewPlan.Name = storey.Name;
+
+                        newViews.Add(newViewPlan);
+                    }
+
+                    //set viewplan in room instance for boundary placement
+                    foreach (IfcRooms room in Rooms)
+                    {
+                        foreach (ViewPlan vp in newViews)
+                        {
+                            if (room.level == vp.Name)
+                            {
+                                room.view = vp;
+                            }
+                        }
                     }
                 }
+
+
+                
+
             }
 
         }
