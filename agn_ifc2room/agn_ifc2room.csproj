@@ -48,6 +48,22 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DBG23|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DBG23\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DBG24|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DBG24\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
@@ -105,6 +121,22 @@
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2022\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="RevitAPI" Condition="'$(Configuration)' == 'DBG23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPI" Condition="'$(Configuration)' == 'REL23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPI" Condition="'$(Configuration)' == 'DBG24'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2024\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPI" Condition="'$(Configuration)' == 'REL24'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2024\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'DBG17'">
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2017\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
@@ -145,6 +177,22 @@
       <HintPath>$(ProgramW6432)\Autodesk\Revit 2022\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'DBG23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'REL23'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2023\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'DBG24'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2024\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI" Condition="'$(Configuration)' == 'REL24'">
+      <HintPath>$(ProgramW6432)\Autodesk\Revit 2024\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -175,6 +223,14 @@
     </Reference>
     <Reference Include="Xbim.Geometry.Engine.Interop, Version=5.1.0.0, Culture=neutral, PublicKeyToken=11e3655e576ec5a9, processorArchitecture=MSIL">
       <HintPath>..\packages\Xbim.Geometry.Engine.Interop.5.1.403\lib\net472\Xbim.Geometry.Engine.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Xbim.Geometry.Engine32, Version=0.0.0.0, Culture=neutral, PublicKeyToken=11e3655e576ec5a9, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine32.dll</HintPath>
+    </Reference>
+    <Reference Include="Xbim.Geometry.Engine64, Version=0.0.0.0, Culture=neutral, PublicKeyToken=11e3655e576ec5a9, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Xbim.Geometry.Engine.Interop.5.1.403\build\net472\Xbim.Geometry.Engine64.dll</HintPath>
     </Reference>
     <Reference Include="Xbim.Ifc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=11e3655e576ec5a9, processorArchitecture=MSIL">
       <HintPath>..\packages\Xbim.Ifc.5.1.323\lib\net47\Xbim.Ifc.dll</HintPath>
@@ -268,6 +324,8 @@
     <PostBuildEvent>if $(Configuration) == DBG20 goto 2020
 if $(Configuration) == DBG21 goto 2021
 if $(Configuration) == DBG22 goto 2022
+if $(Configuration) == DBG23 goto 2023
+if $(Configuration) == DBG24 goto 2024
 :2020
 copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2020"
 goto exit
@@ -276,6 +334,13 @@ copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\a
 goto exit
 :2022
 copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2022"
+goto exit
+:2023
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2023"
+goto exit
+:2024
+copy "$(ProjectDir)$(OutDir)*.dll" "C:\ProgramData\Autodesk\ApplicationPlugins\agn-apps_ifc2room.bundle\Contents\2024"
+goto exit
 :exit</PostBuildEvent>
   </PropertyGroup>
 </Project>
