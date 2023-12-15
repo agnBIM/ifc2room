@@ -40,7 +40,6 @@ then creates new levels based on the Ifc file. <br>
 
 ## Known Limitations
 · Only one architectural model per Ifc file (no merged Ifc files) <br>
-· Currently only tested for Ifc 2x3 <br>
 · Revit spaces should not be exported as IfcSpace, otherwise they will overlay the rooms. <br>
 · Due to Revit's own geometric minimum tolerances, inaccuracies within the Ifc file may cause <br>
 problems with the IfcSpaces to be converted. This would have corresponding consequences for

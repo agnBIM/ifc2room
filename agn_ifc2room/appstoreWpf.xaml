@@ -10,7 +10,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:agn.ifc2revitRooms"
              mc:Ignorable="d"
-             Title="agn | ifc2room  1.1"
+             Title="agn | ifc2room  1.2"
              Style="{DynamicResource CustomTitleBar}" WindowStyle="None" MinWidth="670" MinHeight="240" Height="240" Width="670">
 
     <Window.Resources>
