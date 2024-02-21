@@ -16,7 +16,7 @@ using Autodesk.Revit.DB.Architecture;
 
 namespace agn.ifc2revitRooms
 {
-    class IfcRooms
+    public class IfcRooms
     {
         private string name;
         private string number;
